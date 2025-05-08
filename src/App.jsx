@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState("");
+  const [todo, setTodo] = useState([
+    {
+      id: 1,
+      text: "javascript",
+      completed: false,
+    },
+    {
+      id: 2,
+      text: "java",
+      completed: false,
+    },
+  ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="border border-black w-[50%] p-3 bg-blue-800 m-4 rounded-lg text-white">
+      <input
+        className="border rounded-md p-3 bg-blue-200 text-black"
+        type="text"
+        placeholder="Enter the Task"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button className="border border-black bg-blue-400 p-3 m-3 rounded-md">
+        ADD
+      </button>
+      <ul className="mt-4">
+        {todo.map((item) => (
+          <li key={item.id} className="mb-2">
+            {item.text} - {item.completed ? "Done" : "Pending"}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
